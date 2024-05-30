@@ -1,0 +1,52 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.suo
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+*.vcxproj.filters
+*.dbmdl
+*.jfm
+.vscode/
+
+# Rider
+.idea/
+.idea/**
+
+# Mono auto generated files
+mono_crash.*
+
+# MacOS files
+.DS_Store
+.AppleDouble
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Logs
+*.log
+
+# Other files
+*.tmp
+*.bak
+*.swp
+*.swo
+*.resx
+*.cache
