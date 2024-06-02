@@ -1,4 +1,7 @@
-﻿
+﻿using System;
+using System.Text;
+
+
 public enum Level {
     Level1 = 1,
     Level2 = 2,
@@ -6,17 +9,18 @@ public enum Level {
 }
 
 
-abstract class Employeers 
+abstract class Employeer 
 {
     public decimal Salary {get; set;}
     public int Coffee {get; set;}
     public int Reports {get; set;}
-    // public Level Rank {get; set;}
+    public Level Rank {get; set;}
 
-    public Employeers(int salary, int coffee, int reports) {
+    public Employeer(decimal salary, int coffee, int reports, Level rank) {
         Salary = salary;
         Coffee = coffee;
         Reports = reports;
+        Rank = rank;
     }
 
     public void updateSalaryRank(Level rank)
@@ -33,60 +37,119 @@ abstract class Employeers
                 break;
         }
     }
+    public virtual void Info() {
+        Console.WriteLine($"Salary: {Salary}, Coffee: {Coffee}, Reports: {Reports} \n");
+    }
 }
  
 
-class Manager : Employeers 
+class Manager : Employeer 
 {
-    public Manager (Level rank) : base (50_000, 20, 200) 
+    public Manager (Level rank) : base (50_000, 20, 200, rank) 
     {
         updateSalaryRank(rank);
     }
-}
 
-class Marketing : Employeers 
-{
-    public Marketing (Level rank) : base (40_000, 15, 150) 
-    {
-        updateSalaryRank(rank);
+    public override void Info() {
+        Console.WriteLine($"Manager {Rank}");
+        base.Info();
     }
 }
 
-
-class Engineer : Employeers 
+class Marketing : Employeer 
 {
-    public Engineer (Level rank) : base (20_000, 5, 50) 
+    public Marketing (Level rank) : base (40_000, 15, 150, rank) 
     {
         updateSalaryRank(rank);
     }
-}
 
-class Analyst : Employeers 
-{
-    public Analyst (Level rank) : base (80_000, 50, 5) 
-    {
-        updateSalaryRank(rank);
+    public override void Info() {
+        Console.WriteLine($"Marketing {Rank}");
+        base.Info();
     }
 }
 
 
-class SalaryReport 
+class Engineer : Employeer 
 {
-    public Employeers[] department {get; init;}
+    public Engineer (Level rank) : base (20_000, 5, 50, rank) 
+    {
+        updateSalaryRank(rank);
+    }
+    public override void Info() {
+        Console.WriteLine($"Engineer {Rank}");
+        base.Info();
+    }
+}
+
+class Analyst : Employeer 
+{
+    public Analyst (Level rank) : base (80_000, 50, 5, rank) 
+    {
+        updateSalaryRank(rank);
+    }
+    public override void Info() {
+        Console.WriteLine($"Analyst {Rank}");
+        base.Info();
+    }
+}
+
+
+class Department 
+{
+    public string Name {get; init;}
+    public Employeer[] Employeers {get; init;}
+    public Leader Leader {get; init;}
+
+    public Department(string name, Leader leader, Employeer[] employeers)
+    {
+        this.Name = name;
+        this.Employeers = employeers;
+        this.Leader = leader;
+    }
     
-    public void generateReport()
+    public void generateSalaryReport()
     {
-        Console.WriteLine("");
+        foreach (Employeer employeer in this.Employeers) {
+            employeer.Info();
+        }
     }
 }
 
-class Leader 
-{
-    public Employeers employeers {get; init;}
 
-    public Leader(Employeers employeers)
+class SalaryReport
+{
+    public string[] columns = {"Департамент", "Сотрудников", "Тугрики", "Кофе", "Страницы", "Тугр./стр."};
+    public int delimiterSpaces = 5;
+    public int[] columnWidth = {};
+
+    public void printHeader()
     {
-        this.employeers = employeers;
+        foreach (string column in columns) {
+            Console.Write(column);
+            columnWidth.Append(column.Length + 5);
+            for (int j = 0; j < delimiterSpaces; j++) {
+                Console.Write(" ");
+            }
+        }
+
+    }
+}
+
+class Leader
+{
+    public decimal Salary;
+    public int Coffee;
+    public int Report = 0;
+
+    public Leader(Employeer employeer)
+    {
+        Salary = employeer.Salary * (decimal) 1.5;
+        Coffee = (int) (employeer.Coffee * 1.5);
+    }
+
+    public virtual void Info() {
+        Console.WriteLine($"Salary: {Salary}, Coffee: {Coffee}, Reports: {Report} \n");
     }
 }
 
@@ -100,9 +163,44 @@ public class Accounting
         Marketing marketer = new Marketing(Level.Level2);
         Engineer engineer = new Engineer(Level.Level3);
         Analyst analyst = new Analyst(Level.Level3);
-        // Leader leaderManager = new Leader(manager);
 
-        Console.WriteLine($"engineer Salary: {engineer.Salary}");
-        // Console.WriteLine($"Leader Manager Salary: {leaderManager.Salary}");
+        Leader leaderManager = new Leader(manager);
+
+        Employeer[] employeers = {manager, marketer, engineer, analyst};
+        Department accounting = new Department("Accounting", new Leader(manager), employeers);
+        accounting.generateSalaryReport();
+        leaderManager.Info();
+
+
+        string[] columns = {"Департамент", "Сотрудников", "Тугрики", "Кофе", "Страницы", "Тугр./стр."};
+        string[,] data = {
+            { "1", "Alice", "30" },
+            { "2", "Bob", "25" },
+            { "3", "Charlie", "35" },
+        };
+
+        StringBuilder table = new StringBuilder();
+        // Create header
+        foreach (var header in columns)
+        {
+            table.Append(header.PadRight(15));  // Adjust the padding to fit your data
+        }
+        table.AppendLine();
+        table.Append('-', 90);
+        table.AppendLine();
+
+        // Create rows
+        for (int i = 0; i < data.GetLength(0); i++)
+        {
+            for (int j = 0; j < data.GetLength(1); j++)
+            {
+                table.Append(data[i, j].PadRight(15));  // Ensure each column is aligned
+            }
+            table.AppendLine();
+        }
+        table.Append('-', 90);
+        table.AppendLine();
+
+        Console.WriteLine(table.ToString());
     }
 }
