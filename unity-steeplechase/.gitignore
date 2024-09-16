@@ -1,0 +1,35 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+.vscode/
+*.csproj
+*.sln
+*.user
+*.suo
+
+# Unity auto-generated files
+UserSettings/
+Packages/manifest.json.meta
+*.pidb
+*.booproj
+*.userprefs
+*.csproj
+*.sln
+*.suo
+*.user
+*.unityproj
+*.pidb.meta
+*.pdb
+*.mdb
+*.opendb
+
+# OS generated files
+.DS_Store
+Thumbs.db
