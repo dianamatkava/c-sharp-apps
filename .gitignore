@@ -1,52 +1,36 @@
-# Build results
-[Bb]in/
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
 [Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
 
-# User-specific files
+# Visual Studio files
+.vs/
+.vscode/
+*.csproj
+*.sln
 *.user
-*.userosscache
-*.sln.docstates
-*.rsuser
 *.suo
 
-# Visual Studio
-.vs/
-*.vcxproj.user
-*.vcxproj.filters
-*.vcxproj.filters
-*.dbmdl
-*.jfm
-.vscode/
+# Unity auto-generated files
+UserSettings/
+Packages/manifest.json.meta
+*.pidb
+*.booproj
+*.userprefs
+*.csproj
+*.sln
+*.suo
+*.user
+*.unityproj
+*.pidb.meta
+*.pdb
+*.mdb
+*.opendb
 
-# Rider
-.idea/
-.idea/**
-
-# Mono auto generated files
-mono_crash.*
-
-# MacOS files
+# OS generated files
 .DS_Store
-.AppleDouble
-
-# Windows system files
 Thumbs.db
-ehthumbs.db
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Logs
-*.log
-
-# Other files
-*.tmp
-*.bak
-*.swp
-*.swo
-*.resx
-*.cache
+bin

@@ -2696,8 +2696,8 @@ MonoBehaviour:
   jumpForce: 7
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  groundCheck: {fileID: 0}
+    m_Bits: 4294967295
+  groundCheck: {fileID: 1405907100}
 --- !u!114 &1405907103
 MonoBehaviour:
   m_ObjectHideFlags: 0
